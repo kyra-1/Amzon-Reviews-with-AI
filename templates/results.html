@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Review Analysis Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Review Analysis Results</h2>
+
+        <h3>LDA Topics:</h3>
+        <div class="lda-list">
+            <ul>
+                {% for topic in lda_topics %}
+                    <li>{{ topic }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <h3>ChatGPT Analysis:</h3>
+        <div class="chat-response">
+            {% for paragraph in chatgpt_response.split('\n') %}
+                <p>{{ paragraph }}</p>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
