@@ -1,22 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Product Review Analyzer</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Review Analyzer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
 <body>
     <div class="container">
+        <!-- Product Title and Description -->
         <h1>{{ title }}</h1>
-        <p>{{ description }}</p>
+        <p><strong>Description:</strong> {{ description }}</p>
 
+        <!-- Ratings Distribution Plot -->
         <h3>Ratings Distribution:</h3>
-        <ul class="ratings-list">
-            {% for rating, count in ratings_count.items() %}
-                <li>{{ rating }} stars: {{ count }}</li>
-            {% endfor %}
-        </ul>
+        {% if ratings_plot %}
+            <img src="data:image/png;base64,{{ ratings_plot }}" alt="Ratings Distribution">
+        {% else %}
+            <p>No ratings distribution data available for this product.</p>
+        {% endif %}
 
+        <!-- Ratings Count Summary -->
+        {% if ratings_count %}
+            <h4>Ratings Summary:</h4>
+            <ul>
+                {% for rating, count in ratings_count.items() %}
+                    <li><strong>Rating {{ rating }}:</strong> {{ count }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No detailed ratings data available.</p>
+        {% endif %}
+
+        <!-- Analyze Reviews Form -->
+        <h3>Analyze Reviews:</h3>
         <form action="/analyze_reviews" method="post">
             <input type="hidden" name="asin" value="{{ asin }}">
             <button type="submit" name="review_type" value="positive">Analyze Positive Reviews</button>
