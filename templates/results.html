@@ -16,6 +16,11 @@
                     <li>{{ topic }}</li>
                 {% endfor %}
             </ul>
+            <img src="data:image/png;base64, {{ lda_plot }}" alt="LDA Topics" style="width:100%; height:auto;">
+        </div>
+        <div>
+        <h2>Positive and Negative Word Frequencies</h2>
+        <img src="data:image/png;base64, {{ word_frequencies_plot }}" alt="Word Frequencies Plot">
         </div>
 
         <h3>ChatGPT Analysis:</h3>
